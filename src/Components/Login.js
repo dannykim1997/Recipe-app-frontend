@@ -27,7 +27,7 @@ class Login extends Component {
             if(resp){
             localStorage.setItem("jwt", resp.jwt);
             this.props.handleLogin(resp)
-            this.props.history.push('/')
+            this.props.history.push('/recipes')
             }else{
                 alert('Login failed')
             }
@@ -58,7 +58,7 @@ class Login extends Component {
             />
           </Form.Field>
 
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" type='submit'>
             Login
           </Button>
 
