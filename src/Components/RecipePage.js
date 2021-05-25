@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { Card, CardActions, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
+import { Form } from 'semantic-ui-react';
+import AddToCookbook from './AddToCookbook';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipePage = (props) => {
     const classes = useStyles()
+    
     return (
         <Card className={classes.root}>
             <img src={props.recipe.strMealThumb} className="images" />
@@ -198,199 +202,3 @@ const RecipePage = (props) => {
 }
 
 export default RecipePage
-
-
-// class RecipePage extends Component {
-//     state = {
-//         recipe: []
-//     }
-
-//     getRecipe = () => {
-//         fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=53053`)
-//         .then(r => r.json())
-//         .then((json) => {
-//             this.setState({recipe: json.meals})
-//         })
-//     }
-
-//     componentDidMount = () => {
-//         this.getRecipe()
-//     }
-
-//     render() {
-//         console.log(this.state.recipe)
-//         return (
-//             <div>
-//                 <img src={this.state.recipe.map(rec => rec.strMealThumb)}/>
-//                 <h2>{this.state.recipe.map(rec => rec.strMeal)}</h2>
-//                 <h2>{this.state.recipe.map(rec => rec.strArea)}</h2>
-//                 <h2>{this.state.recipe.map(rec => rec.strCategory)}</h2>
-//                 <h2>{this.state.recipe.map(rec => rec.strInstructions)}</h2>
-//                 <ul>
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure1) && this.state.recipe.map(rec => rec.strIngredient1)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure1)} - {this.state.recipe.map(rec => rec.strIngredient1)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure2) && this.state.recipe.map(rec => rec.strIngredient2)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure2)} - {this.state.recipe.map(rec => rec.strIngredient2)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure3) && this.state.recipe.map(rec => rec.strIngredient3)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure3)} - {this.state.recipe.map(rec => rec.strIngredient3)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure4) && this.state.recipe.map(rec => rec.strIngredient4)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure4)} - {this.state.recipe.map(rec => rec.strIngredient4)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure5) && this.state.recipe.map(rec => rec.strIngredient5)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure5)} - {this.state.recipe.map(rec => rec.strIngredient5)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure6) && this.state.recipe.map(rec => rec.strIngredient6)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure6)} - {this.state.recipe.map(rec => rec.strIngredient6)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure7) && this.state.recipe.map(rec => rec.strIngredient7)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure7)} - {this.state.recipe.map(rec => rec.strIngredient7)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure8) && this.state.recipe.map(rec => rec.strIngredient8)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure8)} - {this.state.recipe.map(rec => rec.strIngredient8)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure9) && this.state.recipe.map(rec => rec.strIngredient9)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure9)} - {this.state.recipe.map(rec => rec.strIngredient9)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure10) && this.state.recipe.map(rec => rec.strIngredient10)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure10)} - {this.state.recipe.map(rec => rec.strIngredient10)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure11) && this.state.recipe.map(rec => rec.strIngredient11)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure11)} - {this.state.recipe.map(rec => rec.strIngredient11)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure12) && this.state.recipe.map(rec => rec.strIngredient12)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure12)} - {this.state.recipe.map(rec => rec.strIngredient12)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure13) && this.state.recipe.map(rec => rec.strIngredient13)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure13)} - {this.state.recipe.map(rec => rec.strIngredient13)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure14) && this.state.recipe.map(rec => rec.strIngredient14)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure14)} - {this.state.recipe.map(rec => rec.strIngredient14)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure15) && this.state.recipe.map(rec => rec.strIngredient15)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure15)} - {this.state.recipe.map(rec => rec.strIngredient15)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure16) && this.state.recipe.map(rec => rec.strIngredient16)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure16)} - {this.state.recipe.map(rec => rec.strIngredient16)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure17) && this.state.recipe.map(rec => rec.strIngredient17)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure17)} - {this.state.recipe.map(rec => rec.strIngredient17)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure18) && this.state.recipe.map(rec => rec.strIngredient18)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure18)} - {this.state.recipe.map(rec => rec.strIngredient18)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure19) && this.state.recipe.map(rec => rec.strIngredient19)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure19)} - {this.state.recipe.map(rec => rec.strIngredient19)}
-//                             </li>
-//                         )
-//                     }
-//                     {
-//                         this.state.recipe.map(rec => rec.strMeasure20) && this.state.recipe.map(rec => rec.strIngredient20)
-//                         && (
-//                             <li>
-//                                 {this.state.recipe.map(rec => rec.strMeasure20)} - {this.state.recipe.map(rec => rec.strIngredient20)}
-//                             </li>
-//                         )
-//                     }
-//                 </ul>
-//             </div>
-//         )
-//     }
-// }
-
-// export default RecipePage

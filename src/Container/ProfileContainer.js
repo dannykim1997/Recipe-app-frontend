@@ -17,22 +17,44 @@ class Profile extends React.Component {
         })
         .then(r => r.json())
         .then(json => {
-          // console.log(json)
+          console.log(json.data)
             this.setState({userRecipes: json.data})
           }
         )
     }
 
+    // addRecipe = () => {
+    //   fetch('http://localhost:3000/recipes',{
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type':'application/json',
+    //         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    //       },
+    //       body: JSON.stringify(
+    //         {
+    //         attributes: {
+    //           id: props.recipe.attributes.name
+    //         }
+    //       }
+    //       )
+    //     })
+    //     .then(r => r.json())
+    //     .then(json => {
+    //       console.log(json.data)
+    //         this.setState({userRecipes: json.data})
+    //       }
+    //     )
+    //   }
+
     componentDidMount = () => {
         this.getUserRecipes()
+        // this.addRecipe()
     }
 
-    
     render() {
         return (
             <div>
                 {this.state.userRecipes.map(recipe => <UserRecipeCard recipe={recipe} key={recipe.id}/>)}
-                {this.state.userRecipes.map(recipe => <UserRecipePage recipe={recipe} key={recipe.id}/>)}
             </div>
         )
     }

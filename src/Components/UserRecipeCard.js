@@ -1,6 +1,8 @@
 import React from "react"
 import { Card, CardActions, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
 const UserRecipeCard = (props) => {
     const classes = useStyles()
     return (
-        <Card className={classes.root}>
+         
+        <Card className={classes.root} component={Link} to={`/myrecipe/${props.recipe.attributes.id}`}>
             <img src={props.recipe.attributes.image} className="images" />
             <CardContent>
                 <Typography className={classes.title}>

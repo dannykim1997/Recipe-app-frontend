@@ -7,7 +7,7 @@ import RecipesContainer from "./Container/RecipesContainer";
 import ProfileContainer from "./Container/ProfileContainer";
 import Signup from "./Components/Signup";
 import RecipePageContainer from "./Container/RecipePageContainer";
-import UserRecipePage from "./Components/UserRecipePage"
+import UserRecipeContainer from "./Container/UserRecipeContainer";
 
 class App extends React.Component {
   state = {
@@ -31,12 +31,8 @@ class App extends React.Component {
           <Route path='/recipes'>
             <RecipesContainer/>
           </Route>
-          <Route path='/recipe/:id'>
-            <RecipePageContainer/>
-          </Route>
-          <Route path='/myrecipe/:id'>
-            <UserRecipePage/>
-          </Route>
+          <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer {...routerProps}/>}/>
+          <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps}/>}/>
           <Route
               path="/profile"
               component={() => {

@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
 const UserRecipeCard = (props) => {
     const classes = useStyles()
     return (
+        <div>
+        {props.recipe.attributes ?
         <Card className={classes.root}>
             <img src={props.recipe.attributes.image} className="images" />
             <CardContent>
@@ -33,6 +35,10 @@ const UserRecipeCard = (props) => {
                 {props.recipe.attributes.instructions}
             </div>
         </Card>
+        :
+        null
+        }
+        </div>
     )
 }
 

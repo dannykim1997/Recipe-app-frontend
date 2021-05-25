@@ -23,7 +23,7 @@ const RecipeCard = (props) => {
                     {props.recipe.strMeal}
                 </Typography>
                 <Typography>
-                    {props.recipe.strArea} <br />
+                    {props.recipe.strArea} <br/>
                     {props.recipe.strCategory}
                 </Typography>
             </CardContent>

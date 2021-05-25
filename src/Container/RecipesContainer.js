@@ -20,7 +20,7 @@ class Recipes extends React.Component {
         searchTerm: ''
     }
 
-    getRecipes = (searchTerm='a') => {
+    getRecipes = (searchTerm='b') => {
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchTerm}`)
         .then(r => r.json())
         .then((json) => {
@@ -37,7 +37,11 @@ class Recipes extends React.Component {
             <div>
             <SearchBar searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
             <Grid container direction='space-between' className='grid'>
-                {this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id}/>)} 
+                    {this.state.recipes ? 
+                    this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id}/>) 
+                    : 
+                    <h2>no recipes</h2>
+                    }
             </Grid>
             </div>
         )
