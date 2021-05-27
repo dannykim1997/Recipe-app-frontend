@@ -8,10 +8,9 @@ const SearchBar = (props) => {
     }
     
     return (
-        <div>
+        <div className="search">
             <input
                 type='text'
-                id='search'
                 placeholder='search by letter'
                 onChange={searchRecipe}
             />

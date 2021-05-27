@@ -7,38 +7,15 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 import SearchBar from '../Components/SearchBar';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-}))
-
 class Recipes extends React.Component {
     
-    state = {
-        recipes: [],
-        searchTerm: ''
-    }
-
-    getRecipes = (searchTerm='b') => {
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchTerm}`)
-        .then(r => r.json())
-        .then((json) => {
-            this.setState({recipes: json.meals})
-        })
-    }
-
-    componentDidMount = () => {
-        this.getRecipes()
-    }
-
     render() {
         return (
             <div>
-            <SearchBar searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
+            <SearchBar searchTerm={this.props.searchTerm} getRecipes={this.props.getRecipes}/>
             <Grid container direction='space-between' className='grid'>
-                    {this.state.recipes ? 
-                    this.state.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id}/>) 
+                    {this.props.recipes ? 
+                    this.props.recipes.map(recipe => <RecipeCard recipe={recipe} key={recipe.id}/>) 
                     : 
                     <h2>no recipes</h2>
                     }
@@ -49,5 +26,3 @@ class Recipes extends React.Component {
 }
 
 export default withRouter(Recipes)
-// container justify='space-evenly'
-// {this.state.recipes.map(recipe => <RecipePage recipe={recipe} key={recipe.id}/>)}

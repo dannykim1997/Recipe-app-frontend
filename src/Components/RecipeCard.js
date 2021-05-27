@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 200,
+        // maxWidth: 200,
+        width: 200,
+        margin: 20
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    media: {
+        height: 140
     }
 }))
 
@@ -17,7 +22,7 @@ const RecipeCard = (props) => {
     const classes = useStyles()
     return (
         <Card className={classes.root} component={Link} to={`/recipe/${props.recipe.idMeal}`}>
-            <img src={props.recipe.strMealThumb} className="images" />
+            <CardMedia className={classes.media} image={`${props.recipe.strMealThumb}`}/>
             <CardContent>
                 <Typography className={classes.title}>
                     {props.recipe.strMeal}

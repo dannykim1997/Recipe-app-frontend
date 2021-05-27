@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Button, Segment } from 'semantic-ui-react';
-
 import { withRouter } from 'react-router';
 
 class Signup extends React.Component {
@@ -33,7 +32,8 @@ class Signup extends React.Component {
         }
       }
     )
-}
+  }
+
   render(){
     return (
       <Segment className={'form-container'}>
@@ -47,11 +47,9 @@ class Signup extends React.Component {
             <label>Password</label>
             <input type='password' name='password' placeholder='Password' onChange={this.handleInputChange} />
           </Form.Field>
-
           <Button type='submit' positive>
             Signup
           </Button>
-
         </Form>
       </Segment>
     )

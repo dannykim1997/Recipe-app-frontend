@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 const UserRecipeCard = (props) => {
     const classes = useStyles()
     return (
-         
         <Card className={classes.root} component={Link} to={`/myrecipe/${props.recipe.attributes.id}`}>
             <img src={props.recipe.attributes.image} className="images" />
             <CardContent>
@@ -29,9 +28,6 @@ const UserRecipeCard = (props) => {
                     {props.recipe.attributes.category}
                 </Typography>
             </CardContent>
-            <div>
-                {props.recipe.attributes.ingredients.split("|")} - {props.recipe.attributes.measurements.split("|")}
-            </div>
         </Card>
     )
 }

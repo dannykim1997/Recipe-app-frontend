@@ -16,6 +16,11 @@ code {
   padding: 20px;
   padding-bottom: 200px;
 } */
+
+.search {
+  text-align: center;
+}
+
 .images {
   width: 200px;
 }

@@ -9,7 +9,7 @@ const Nav = ({ logged_in, history }) => {
         <div className={'nav-bar-image'} >
           <Header as='h2' icon textAlign='center'>
   
-            <Header.Content>Title</Header.Content>
+            <Header.Content>remixcipe</Header.Content>
           </Header>
         </div>
   
@@ -18,13 +18,13 @@ const Nav = ({ logged_in, history }) => {
           {
             !logged_in && (
               <>
-                <Menu.Item onClick={() => history.push('/login')} name='login' />
+                <Menu.Item onClick={() => history.push('/')} name='login' />
                 <Menu.Item onClick={() => history.push('/signup')} name='signup' />
               </>
             )
           }
           {
-            !logged_in && (
+            logged_in && (
               <>
               <Menu.Item onClick={() => history.push('/profile')} name='profile'/>
               <Menu.Item onClick={() => history.push('/logout')} name='logout' />
