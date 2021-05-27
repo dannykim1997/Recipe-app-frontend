@@ -26,9 +26,18 @@ class Login extends Component {
         .then(resp => {
             if(resp){
             localStorage.setItem("jwt", resp.jwt);
+            // localStorage.setItem("username", resp.user.username);
             this.props.handleLogin(resp)
             this.props.history.push('/recipes')
-            }else{
+            }
+        // .then(tokenObj => {
+        //   if (tokenObj) {
+        //       localStorage.setItem("token", tokenObj.jwt);
+        //       localStorage.setItem("username", tokenObj.user.username);
+        //       this.props.handleLogin(tokenObj);
+        //       this.props.history.push("/recipes")
+        //   }
+            else{
                 alert('Login failed')
             }
           }

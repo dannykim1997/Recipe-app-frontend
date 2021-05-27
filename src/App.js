@@ -8,7 +8,6 @@ import ProfileContainer from "./Container/ProfileContainer";
 import Signup from "./Components/Signup";
 import RecipePageContainer from "./Container/RecipePageContainer";
 import UserRecipeContainer from "./Container/UserRecipeContainer";
-import SearchBar from './Components/SearchBar';
 
 class App extends React.Component {
   
@@ -18,12 +17,17 @@ class App extends React.Component {
     userRecipes: [],
     recipes: [],
     searchTerm: '',
-    token: null,
+    // token: null,
     // token: localStorage.getItem('token')
   }
 
-  handleLogin = (user, token) => {
-    this.setState({logged_in: true, user: user, token});
+  // handleLogin = (user, token) => {
+  //   this.setState({logged_in: true, user: user, token});
+  //   this.getUserRecipes()
+  // };
+
+  handleLogin = (user) => {
+    this.setState({logged_in: true, user: user});
     this.getUserRecipes()
   };
 
@@ -37,11 +41,12 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getRecipes()
-    const authToken = localStorage.getItem('token')
-    if (authToken) {
-      this.setState({ logged_in: true, token: authToken })
+    // const authToken = localStorage.getItem('token')
+    if (localStorage.getItem('jwt')) {
+      this.setState({ logged_in: true, token: localStorage.getItem('jwt')})
+      this.getUserRecipes()
     }
-    }
+  }
 
   getUserRecipes = () => {
     fetch('http://localhost:3000/recipes',{
@@ -85,7 +90,7 @@ deleteUserRecipe = (deleteRecipe) => {
     this.setState({userRecipes: newState})
   }
 
-  render() {
+render() {
   return (
     <div className="App">
       <BrowserRouter>
@@ -98,14 +103,16 @@ deleteUserRecipe = (deleteRecipe) => {
             <RecipesContainer recipes={this.state.recipes} searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
           </Route>
           <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer {...routerProps} getNewRecipe={this.getNewRecipe}/>}/>
-          <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe}/>}/>
+          <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe}
+          getUserRecipes={this.getUserRecipes}
+          />}/>
           <Route
               path="/profile"
               component={() => {
                 return this.state.logged_in ? 
                 (<ProfileContainer userRecipes={this.state.userRecipes}/>) 
                 : 
-                (<Redirect to="/" />)
+                (<Redirect to="/profile" />)
               }}
             />
           <Route exact path='/signup' component={Signup}/>
@@ -113,7 +120,7 @@ deleteUserRecipe = (deleteRecipe) => {
               path="/logout"
               component={() => {
                 localStorage.clear();
-                this.setState({ logged_in: false, token: null });
+                this.setState({ logged_in: false });
                 return <Redirect to="/" />;
               }}
             />

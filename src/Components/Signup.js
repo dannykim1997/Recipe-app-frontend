@@ -31,6 +31,14 @@ class Signup extends React.Component {
             alert('Signup failed')
         }
       }
+      // .then(tokenObj => {
+      //   if(tokenObj){
+      //   localStorage.setItem("token", tokenObj.jwt);
+      //   this.props.history.push('/')
+      //   }else{
+      //       alert('Signup failed')
+      //   }
+      // }
     )
   }
 

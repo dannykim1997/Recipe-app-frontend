@@ -43,6 +43,7 @@ class UserRecipe extends Component {
 
     componentDidMount = () => {
         this.getUserRecipe()
+        // this.editUserRecipe()
     }
 
     deleteRecipeHelper = () => {
@@ -50,25 +51,13 @@ class UserRecipe extends Component {
         this.props.deleteUserRecipe(deleteRecipe)
     } 
 
-    // handleViewForm = () => {
-    //     this.setState({viewForm: !this.state.viewForm})
-    //   }
-
     render() {
         return (
             <div>
-                {/* {!this.props.viewForm ? */}
-                <UserRecipePage recipe={this.state.userRecipe} deleteUserRecipe={this.deleteRecipeHelper} editUserRecipe={this.editUserRecipe}
-                // handleViewForm={this.handleViewForm}
+                <UserRecipePage recipe={this.state.userRecipe} deleteUserRecipe={this.deleteRecipeHelper} editUserRecipe={this.editUserRecipe}       
                 />
-                {/* && */}
                 <EditRecipeForm recipe={this.state.userRecipe} editUserRecipe={this.editUserRecipe} handleRecipeChange={this.handleRecipeChange}
-                // viewForm={this.state.viewForm}
-                // handleViewForm={this.handleViewForm}
                 />
-                {/* :
-                null
-                } */}
             </div>
         )
     }
