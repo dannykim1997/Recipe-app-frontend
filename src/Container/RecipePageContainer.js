@@ -73,7 +73,7 @@ export default class RecipePages extends Component {
     render() {
         return (
             <div>
-                <RecipePage recipe={this.state.recipe} addRecipe={this.addRecipeHelper}/>
+                <RecipePage recipe={this.state.recipe} addRecipe={this.addRecipeHelper} logged_in={this.props.logged_in}/>
             </div>
         )
     }

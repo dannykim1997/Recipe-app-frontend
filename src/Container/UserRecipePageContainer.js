@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import UserRecipePage from '../Components/UserRecipePage';
-import EditRecipeForm from '../Components/EditRecipeForm'
+import EditUserRecipeForm from '../Components/EditUserRecipeForm'
 
 export default class UserRecipe extends Component {
   state = {
@@ -17,7 +17,7 @@ export default class UserRecipe extends Component {
     })
     .then(r => r.json())
     .then(json => {
-      this.setState({ userRecipe: json.data })
+      this.setState({userRecipe: json.data})
     })
   }
 
@@ -49,7 +49,7 @@ export default class UserRecipe extends Component {
     return (
       <div>
         <UserRecipePage recipe={this.state.userRecipe} deleteUserRecipe={this.deleteRecipeHelper} editUserRecipe={this.editUserRecipe}/>
-        <EditRecipeForm recipe={this.state.userRecipe} editUserRecipe={this.editUserRecipe} handleRecipeChange={this.handleRecipeChange}/>
+        <EditUserRecipeForm recipe={this.state.userRecipe} editUserRecipe={this.editUserRecipe} handleRecipeChange={this.handleRecipeChange}/>
       </div>
     )
   }

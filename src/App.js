@@ -4,10 +4,10 @@ import "semantic-ui-css/semantic.min.css";
 import Login from "./Components/Login";
 import Nav from "./Components/Nav";
 import RecipesContainer from "./Container/RecipesContainer";
-import ProfileContainer from "./Container/ProfileContainer";
+import UserRecipesContainer from "./Container/UserRecipesContainer";
 import Signup from "./Components/Signup";
 import RecipePageContainer from "./Container/RecipePageContainer";
-import UserRecipeContainer from "./Container/UserRecipeContainer";
+import UserRecipePageContainer from "./Container/UserRecipePageContainer";
 
 export default class App extends React.Component {
   state = {
@@ -44,6 +44,10 @@ export default class App extends React.Component {
     .then(json => {
       this.setState({userRecipes: json.data})
     })
+  }
+
+  reverseUserRecipes = () => {
+      this.setState({userRecipes: [...this.state.userRecipes.reverse()]})
   }
 
   componentDidMount = () => {
@@ -154,13 +158,13 @@ export default class App extends React.Component {
             <Route path='/recipes'>
               <RecipesContainer recipes={this.state.recipes} searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
             </Route>
-            <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer {...routerProps} getNewRecipe={this.getNewRecipe}/>}/>
-            <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe} getUserRecipes={this.getUserRecipes} userRecipes={this.state.userRecipes}/>}/>
+            <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer logged_in={this.state.logged_in} {...routerProps} getNewRecipe={this.getNewRecipe}/> }/>
+            <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipePageContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe} getUserRecipes={this.getUserRecipes} userRecipes={this.state.userRecipes}/>}/>
             <Route
               path="/profile"
               component={() => {
                 return this.state.logged_in ? 
-                (<ProfileContainer userRecipes={this.state.userRecipes} addUserRecipe={this.addUserRecipe}/>) 
+                (<UserRecipesContainer userRecipes={this.state.userRecipes} addUserRecipe={this.addUserRecipe} reverseOrder={this.reverseUserRecipes}/>) 
                 : 
                 (<Redirect to="/profile" />)
               }}
