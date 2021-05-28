@@ -1,6 +1,4 @@
-import React from 'react';
-
-const SearchBar = (props) => {
+export default function SearchBar(props) {
     
     const searchRecipe = (e) => {
         e.preventDefault()
@@ -17,5 +15,3 @@ const SearchBar = (props) => {
         </div>
     )
 }
-
-export default SearchBar

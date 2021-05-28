@@ -2,126 +2,125 @@ import React, { Component } from "react";
 import { Form, Segment } from 'semantic-ui-react';
 
 export default class EditRecipeForm extends Component {
+  state = {
+    name: [],
+    image: [],
+    category: [],
+    instructions: [],
+    ingredient1: [],
+    ingredient2: [],
+    ingredient3: [],
+    ingredient4: [],
+    ingredient5: [],
+    ingredient6: [],
+    ingredient7: [],
+    ingredient8: [],
+    ingredient9: [],
+    ingredient10: [],
+    ingredient11: [],
+    ingredient12: [],
+    ingredient13: [],
+    ingredient14: [],
+    ingredient15: [],
+    ingredient16: [],
+    ingredient17: [],
+    ingredient18: [],
+    ingredient19: [],
+    ingredient20: [],
+    measurement1: [],
+    measurement2: [],
+    measurement3: [],
+    measurement4: [],
+    measurement5: [],
+    measurement6: [],
+    measurement7: [],
+    measurement8: [],
+    measurement9: [],
+    measurement10: [],
+    measurement11: [],
+    measurement12: [],
+    measurement13: [],
+    measurement14: [],
+    measurement15: [],
+    measurement16: [],
+    measurement17: [],
+    measurement18: [],
+    measurement19: [],
+    measurement20: [],
+    viewForm: false
+  }
 
-    state = {
-        name: [],
-        image: [],
-        category: [],
-        instructions: [],
-        ingredient1: [],
-        ingredient2: [],
-        ingredient3: [],
-        ingredient4: [],
-        ingredient5: [],
-        ingredient6: [],
-        ingredient7: [],
-        ingredient8: [],
-        ingredient9: [],
-        ingredient10: [],
-        ingredient11: [],
-        ingredient12: [],
-        ingredient13: [],
-        ingredient14: [],
-        ingredient15: [],
-        ingredient16: [],
-        ingredient17: [],
-        ingredient18: [],
-        ingredient19: [],
-        ingredient20: [],
-        measurement1: [],
-        measurement2: [],
-        measurement3: [],
-        measurement4: [],
-        measurement5: [],
-        measurement6: [],
-        measurement7: [],
-        measurement8: [],
-        measurement9: [],
-        measurement10: [],
-        measurement11: [],
-        measurement12: [],
-        measurement13: [],
-        measurement14: [],
-        measurement15: [],
-        measurement16: [],
-        measurement17: [],
-        measurement18: [],
-        measurement19: [],
-        measurement20: [],
-        viewForm: false
+  handleChange = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  submitEdit = (e) => {
+    e.preventDefault()
+    let recipe = {
+      name: this.state.name,
+      image: this.state.image,
+      category: this.state.category,
+      instructions: this.state.instructions,
+      ingredient1: this.state.ingredient1,
+      ingredient2: this.state.ingredient2,
+      ingredient3: this.state.ingredient3,
+      ingredient4: this.state.ingredient4,
+      ingredient5: this.state.ingredient5,
+      ingredient6: this.state.ingredient6,
+      ingredient7: this.state.ingredient7,
+      ingredient8: this.state.ingredient8,
+      ingredient9: this.state.ingredient9,
+      ingredient10: this.state.ingredient10,
+      ingredient11: this.state.ingredient11,
+      ingredient12: this.state.ingredient12,
+      ingredient13: this.state.ingredient13,
+      ingredient14: this.state.ingredient14,
+      ingredient15: this.state.ingredient15,
+      ingredient16: this.state.ingredient16,
+      ingredient17: this.state.ingredient17,
+      ingredient18: this.state.ingredient18,
+      ingredient19: this.state.ingredient19,
+      ingredient20: this.state.ingredient20,
+      measurement1: this.state.measurement1,
+      measurement2: this.state.measurement2,
+      measurement3: this.state.measurement3,
+      measurement4: this.state.measurement4,
+      measurement5: this.state.measurement5,
+      measurement6: this.state.measurement6,
+      measurement7: this.state.measurement7,
+      measurement8: this.state.measurement8,
+      measurement9: this.state.measurement9,
+      measurement10: this.state.measurement10,
+      measurement11: this.state.measurement11,
+      measurement12: this.state.measurement12,
+      measurement13: this.state.measurement13,
+      measurement14: this.state.measurement14,
+      measurement15: this.state.measurement15,
+      measurement16: this.state.measurement16,
+      measurement17: this.state.measurement17,
+      measurement18: this.state.measurement18,
+      measurement19: this.state.measurement19,
+      measurement20: this.state.measurement20
     }
+    this.props.editUserRecipe(recipe)
+  }
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-    }
+  handleViewForm = () => {
+    this.setState({viewForm: !this.state.viewForm})
+  }
 
-    submitEdit = (e) => {
-        e.preventDefault()
-        let recipe = {
-            name: this.state.name,
-            image: this.state.image,
-            category: this.state.category,
-            instructions: this.state.instructions,
-            ingredient1: this.state.ingredient1,
-            ingredient2: this.state.ingredient2,
-            ingredient3: this.state.ingredient3,
-            ingredient4: this.state.ingredient4,
-            ingredient5: this.state.ingredient5,
-            ingredient6: this.state.ingredient6,
-            ingredient7: this.state.ingredient7,
-            ingredient8: this.state.ingredient8,
-            ingredient9: this.state.ingredient9,
-            ingredient10: this.state.ingredient10,
-            ingredient11: this.state.ingredient11,
-            ingredient12: this.state.ingredient12,
-            ingredient13: this.state.ingredient13,
-            ingredient14: this.state.ingredient14,
-            ingredient15: this.state.ingredient15,
-            ingredient16: this.state.ingredient16,
-            ingredient17: this.state.ingredient17,
-            ingredient18: this.state.ingredient18,
-            ingredient19: this.state.ingredient19,
-            ingredient20: this.state.ingredient20,
-            measurement1: this.state.measurement1,
-            measurement2: this.state.measurement2,
-            measurement3: this.state.measurement3,
-            measurement4: this.state.measurement4,
-            measurement5: this.state.measurement5,
-            measurement6: this.state.measurement6,
-            measurement7: this.state.measurement7,
-            measurement8: this.state.measurement8,
-            measurement9: this.state.measurement9,
-            measurement10: this.state.measurement10,
-            measurement11: this.state.measurement11,
-            measurement12: this.state.measurement12,
-            measurement13: this.state.measurement13,
-            measurement14: this.state.measurement14,
-            measurement15: this.state.measurement15,
-            measurement16: this.state.measurement16,
-            measurement17: this.state.measurement17,
-            measurement18: this.state.measurement18,
-            measurement19: this.state.measurement19,
-            measurement20: this.state.measurement20
-        }
-        this.props.editUserRecipe(recipe)
-    }
-
-    handleViewForm = () => {
-        this.setState({viewForm: !this.state.viewForm})
-      }
-
-      refreshPage() {
-        window.location.reload();
-      }
+  refreshPage() {
+    window.location.reload();
+  }
 
   render() {
     return (
       <div>
-          <button onClick={() => this.handleViewForm()}>show form</button>
-          {this.state.viewForm ? 
+        <button onClick={() => this.handleViewForm()}>show form</button>
+        {this.state.viewForm ? 
           <Form onSubmit={(e) => this.submitEdit(e)}>
             <label>
-                Edit Recipe
+              Edit Recipe
                 <input onChange={this.handleChange} name="name" placeholder="name"/>
                 <input onChange={this.handleChange} name="category" placeholder="category"/>
                 <textarea onChange={this.handleChange} name="instructions" placeholder="instructions"/>
@@ -187,12 +186,10 @@ export default class EditRecipeForm extends Component {
                 <input onChange={this.handleChange} name="ingredient20" placeholder="ingredient 20"/>
                 <input onChange={this.handleChange} name="measurement20" placeholder="measurement 20"/>
             </label>
-            <Form.Button 
-            onClick={this.refreshPage}
-            >Submit</Form.Button>
-        </Form>
-        :
-        null
+            <Form.Button onClick={this.refreshPage}>Submit</Form.Button>
+          </Form>
+          :
+          null
         }
       </div>
     )

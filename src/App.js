@@ -9,8 +9,7 @@ import Signup from "./Components/Signup";
 import RecipePageContainer from "./Container/RecipePageContainer";
 import UserRecipeContainer from "./Container/UserRecipeContainer";
 
-class App extends React.Component {
-  
+export default class App extends React.Component {
   state = {
     logged_in: false,
     user: {},
@@ -25,22 +24,14 @@ class App extends React.Component {
     this.getUserRecipes()
   };
 
-  getRecipes = (searchTerm='b') => {
+  getRecipes = (searchTerm='r') => {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchTerm}`)
     .then(r => r.json())
     .then((json) => {
       this.setState({recipes: json.meals})
     })
-    }
-
-  componentDidMount = () => {
-    this.getRecipes()
-    if (localStorage.getItem('token')) {
-      this.setState({ logged_in: true, token: localStorage.getItem('token')})
-      this.getUserRecipes()
-    }
   }
-
+    
   getUserRecipes = () => {
     fetch('http://localhost:3000/recipes',{
       method: 'GET',
@@ -48,12 +39,19 @@ class App extends React.Component {
         'Content-Type':'application/json',
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    })
+      })
     .then(r => r.json())
     .then(json => {
-        this.setState({userRecipes: json.data})
-      }
-    )
+      this.setState({userRecipes: json.data})
+    })
+  }
+
+  componentDidMount = () => {
+    this.getRecipes()
+    if (localStorage.getItem('token')) {
+      this.setState({logged_in: true, token: localStorage.getItem('token')})
+      this.getUserRecipes()
+    }
   }
 
   getNewRecipe = (recipe) => {
@@ -67,7 +65,7 @@ class App extends React.Component {
     })
     .then(r => r.json())
     .then(recipe => {
-        this.setState({userRecipes: [...this.state.userRecipes, recipe.data]})
+      this.setState({userRecipes: [...this.state.userRecipes, recipe.data]})
     })
   }
 
@@ -124,47 +122,41 @@ class App extends React.Component {
         measurement19: recipe.measurement19,
         measurement20: recipe.measurement20,
         image: recipe.image
-    }})
+      }})
     })
     .then(r => r.json())
     .then((recipe) => {
-        this.setState({
-          userRecipes: [...this.state.userRecipes, recipe.data]
-        })
-      }
-    )
-}
+      this.setState({userRecipes: [...this.state.userRecipes, recipe.data]})
+    })
+  }
 
-deleteUserRecipe = (deleteRecipe) => {
-  let newState = this.state.userRecipes.filter(recipe => recipe.id !== deleteRecipe.id)
-  fetch("http://localhost:3000/recipes/" + deleteRecipe.id,{
-    method: 'DELETE',
-    headers: {
-      'Content-Type':'application/json',
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
+  deleteUserRecipe = (deleteRecipe) => {
+    let newState = this.state.userRecipes.filter(recipe => recipe.id !== deleteRecipe.id)
+    fetch("http://localhost:3000/recipes/" + deleteRecipe.id,{
+      method: 'DELETE',
+      headers: {
+        'Content-Type':'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
     this.setState({userRecipes: newState})
   }
 
-render() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-          <Nav logged_in={this.state.logged_in}/>
-        <Switch>
-          <Route exact path="/">
-            <Login logged_in={this.state.logged_in} handleLogin={this.handleLogin} getUserRecipes={this.getUserRecipes}/>
-          </Route>
-          <Route path='/recipes'>
-            <RecipesContainer recipes={this.state.recipes} searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
-          </Route>
-          <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer {...routerProps} getNewRecipe={this.getNewRecipe}
-          />}/>
-          <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe}
-          getUserRecipes={this.getUserRecipes} userRecipes={this.state.userRecipes}
-          />}/>
-          <Route
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+            <Nav logged_in={this.state.logged_in}/>
+          <Switch>
+            <Route exact path="/">
+              <Login logged_in={this.state.logged_in} handleLogin={this.handleLogin} getUserRecipes={this.getUserRecipes}/>
+            </Route>
+            <Route path='/recipes'>
+              <RecipesContainer recipes={this.state.recipes} searchTerm={this.state.searchTerm} getRecipes={this.getRecipes}/>
+            </Route>
+            <Route path='/recipe/:id' render={(routerProps) => <RecipePageContainer {...routerProps} getNewRecipe={this.getNewRecipe}/>}/>
+            <Route path='/myrecipe/:id' render={(routerProps) => <UserRecipeContainer {...routerProps} deleteUserRecipe={this.deleteUserRecipe} getUserRecipes={this.getUserRecipes} userRecipes={this.state.userRecipes}/>}/>
+            <Route
               path="/profile"
               component={() => {
                 return this.state.logged_in ? 
@@ -173,20 +165,18 @@ render() {
                 (<Redirect to="/profile" />)
               }}
             />
-          <Route exact path='/signup' component={Signup}/>
-          <Route
+            <Route exact path='/signup' component={Signup}/>
+            <Route
               path="/logout"
               component={() => {
                 localStorage.clear();
-                this.setState({ logged_in: false });
-                return <Redirect to="/" />;
+                this.setState({logged_in: false});
+                return <Redirect to="/"/>;
               }}
             />
-        </Switch>
-      </BrowserRouter>
-    </div>
+          </Switch>
+        </BrowserRouter>
+      </div>
     );
   }
 }
-
-export default App;

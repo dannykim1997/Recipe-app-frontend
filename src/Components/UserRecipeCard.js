@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const UserRecipeCard = (props) => {
+export default function UserRecipeCard(props) {
     const classes = useStyles()
     return (
         <Card className={classes.root} component={Link} to={`/myrecipe/${props.recipe.attributes.id}`}>
@@ -24,12 +24,10 @@ const UserRecipeCard = (props) => {
                     {props.recipe.attributes.name}
                 </Typography>
                 <Typography>
-                    {props.recipe.attributes.origin} <br />
+                    {props.recipe.attributes.origin} <br/>
                     {props.recipe.attributes.category}
                 </Typography>
             </CardContent>
         </Card>
     )
 }
-
-export default UserRecipeCard
