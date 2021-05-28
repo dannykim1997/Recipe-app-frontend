@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Segment } from 'semantic-ui-react';
 
-export default class EditRecipeForm extends Component {
+export default class AddRecipeForm extends Component {
 
     state = {
         name: [],
@@ -55,7 +55,7 @@ export default class EditRecipeForm extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    submitEdit = (e) => {
+    submitRecipe = (e) => {
         e.preventDefault()
         let recipe = {
             name: this.state.name,
@@ -103,30 +103,30 @@ export default class EditRecipeForm extends Component {
             measurement19: this.state.measurement19,
             measurement20: this.state.measurement20
         }
-        this.props.editUserRecipe(recipe)
+        this.props.addUserRecipe(recipe)
     }
 
     handleViewForm = () => {
         this.setState({viewForm: !this.state.viewForm})
       }
 
-      refreshPage() {
-        window.location.reload();
-      }
+    //   refreshPage() {
+    //     window.location.reload();
+    //   }
 
   render() {
     return (
       <div>
-          <button onClick={() => this.handleViewForm()}>show form</button>
+          <button onClick={() => this.handleViewForm()}>add recipe</button>
           {this.state.viewForm ? 
-          <Form onSubmit={(e) => this.submitEdit(e)}>
+          <Form onSubmit={(e) => this.submitRecipe(e)}>
             <label>
-                Edit Recipe
+                Make a Recipe
                 <input onChange={this.handleChange} name="name" placeholder="name"/>
                 <input onChange={this.handleChange} name="category" placeholder="category"/>
                 <textarea onChange={this.handleChange} name="instructions" placeholder="instructions"/>
                 <input onChange={this.handleChange} name="image" placeholder="imageUrl"/>
-
+                
                 <input onChange={this.handleChange} name="ingredient1" placeholder="ingredient 1"/>
                 <input onChange={this.handleChange} name="measurement1" placeholder="measurement 1"/>
 
@@ -188,7 +188,7 @@ export default class EditRecipeForm extends Component {
                 <input onChange={this.handleChange} name="measurement20" placeholder="measurement 20"/>
             </label>
             <Form.Button 
-            onClick={this.refreshPage}
+            // onClick={this.refreshPage}
             >Submit</Form.Button>
         </Form>
         :

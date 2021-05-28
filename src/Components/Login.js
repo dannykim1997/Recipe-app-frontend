@@ -15,30 +15,24 @@ class Login extends Component {
         });
       };
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+      e.preventDefault()
         fetch('http://localhost:3000/sessions',{
           method: 'POST',
           headers: {
             'Content-Type':'application/json'
           },
           body: JSON.stringify({ user: {...this.state} })
-        }).then(r => r.json())
-        .then(resp => {
-            if(resp){
-            localStorage.setItem("jwt", resp.jwt);
-            // localStorage.setItem("username", resp.user.username);
-            this.props.handleLogin(resp)
+        })
+        .then(r => r.json())
+        .then(tokenObj => {
+            if(tokenObj.jwt){
+            localStorage.setItem("token", tokenObj.jwt);
+            this.props.handleLogin(tokenObj.jwt)
             this.props.history.push('/recipes')
             }
-        // .then(tokenObj => {
-        //   if (tokenObj) {
-        //       localStorage.setItem("token", tokenObj.jwt);
-        //       localStorage.setItem("username", tokenObj.user.username);
-        //       this.props.handleLogin(tokenObj);
-        //       this.props.history.push("/recipes")
-        //   }
-            else{
-                alert('Login failed')
+            else {
+                alert(tokenObj.message)
             }
           }
         )

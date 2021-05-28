@@ -15,7 +15,8 @@ class Signup extends React.Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
     fetch('http://localhost:3000/users',{
       method: 'POST',
       headers: {
@@ -23,22 +24,15 @@ class Signup extends React.Component {
       },
       body: JSON.stringify({ user: {...this.state} })
     }).then(r => r.json())
-    .then(resp => {
-        if(resp){
-        localStorage.setItem("jwt", resp.jwt);
+    .then(tokenObj => {
+        if(tokenObj.jwt){
+        localStorage.setItem("token", tokenObj.jwt);
+        alert('Signup was successful, please log in.')
         this.props.history.push('/')
         }else{
             alert('Signup failed')
         }
       }
-      // .then(tokenObj => {
-      //   if(tokenObj){
-      //   localStorage.setItem("token", tokenObj.jwt);
-      //   this.props.history.push('/')
-      //   }else{
-      //       alert('Signup failed')
-      //   }
-      // }
     )
   }
 

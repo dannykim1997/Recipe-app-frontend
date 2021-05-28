@@ -13,7 +13,7 @@ class UserRecipe extends Component {
           method: 'GET',
           headers: {
             'Content-Type':'application/json',
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then(r => r.json())
@@ -28,7 +28,7 @@ class UserRecipe extends Component {
           method: 'PATCH',
           headers: {
             'Content-Type':'application/json',
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(recipe)
         })
@@ -43,7 +43,6 @@ class UserRecipe extends Component {
 
     componentDidMount = () => {
         this.getUserRecipe()
-        // this.editUserRecipe()
     }
 
     deleteRecipeHelper = () => {

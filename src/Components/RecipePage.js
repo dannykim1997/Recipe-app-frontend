@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Card, CardActions, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
-// import AddToCookbook from './AddToCookbook';
 import {Segment, Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
