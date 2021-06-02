@@ -33,7 +33,7 @@ export default function SortForm(props) {
             <FormControl className={classes.formControl} variant='outlined'>
                 <InputLabel>Sort</InputLabel>
                 <Select value={props.selection} onChange={(e) => {change(e)}} label='sort' color='primary'>
-                    <MenuItem value='default'>oldest</MenuItem>
+                    <MenuItem value='recipes'>oldest</MenuItem>
                     <MenuItem value='reverse'>newest</MenuItem>
                 </Select>
             </FormControl>

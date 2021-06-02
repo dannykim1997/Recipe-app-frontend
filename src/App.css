@@ -31,11 +31,12 @@ body {
     padding-bottom: 60px;
 }
 
-ul {
+ol {
     display: table;
     margin: 0 auto;
     text-align: left;
     padding-top: 10px;
+    min-width: fit-content;
 }
 
 .buttonPadding {

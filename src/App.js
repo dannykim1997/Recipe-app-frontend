@@ -19,7 +19,7 @@ export default class App extends Component {
     recipes: [],
     userRecipes: [],
     viewEditForm: false,
-    selection: {}
+    selection: ''
   }
 
   handleLogin = (user, token) => {
@@ -36,7 +36,7 @@ export default class App extends Component {
   }
     
   getUserRecipes = () => {
-    fetch('http://localhost:3000/recipes',{
+    fetch(`http://localhost:3000/recipes`,{
       method: 'GET',
       headers: {
         'Content-Type':'application/json',
@@ -176,8 +176,9 @@ export default class App extends Component {
     })
     .then(r => r.json())
     .then((recipe) => {
-      this.setState({userRecipes: [...this.state.userRecipes, recipe.data]})
+      this.setState({userRecipes: [...this.state.userRecipes, recipe.data], selection: 'recipes'})
     })
+    this.selected(this.state.selection)
   }
 
   deleteUserRecipe = (deleteRecipe) => {
@@ -215,12 +216,25 @@ export default class App extends Component {
   }
   
   selected = (e) => {
-    console.log(this.state.selection)
-    console.log(e)
     this.setState({userRecipes: [...this.state.userRecipes.reverse()],
       selection: e
     })
   }
+
+  // selected = (e) => {
+  //   fetch('http://localhost:3000/reverse',{
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type':'application/json',
+  //       Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //     },
+  //     })
+  //   .then(r => r.json())
+  //   .then(json => {
+  //     console.log(json)
+  //     this.setState({userRecipes: json.data, selection: e})
+  //   })
+  // }
 
   render() {
     return (

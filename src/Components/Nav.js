@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Nav({ logged_in, history }) {
   const classes = useStyles()
-
   return (
     <div>
       <Grid className={classes.root} container direction="row">
