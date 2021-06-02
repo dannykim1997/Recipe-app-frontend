@@ -1,10 +1,22 @@
-import React, { Component } from "react";
-import { Form, Segment } from 'semantic-ui-react';
+import React, {Component} from 'react';
+import {Form, Input, TextArea} from 'semantic-ui-react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+      primary: {
+        main: '#f06292',
+      }
+  },
+});
 
 export default class EditRecipeForm extends Component {
   state = {
     name: [],
     image: [],
+    origin: [],
     category: [],
     instructions: [],
     ingredient1: [],
@@ -47,7 +59,6 @@ export default class EditRecipeForm extends Component {
     measurement18: [],
     measurement19: [],
     measurement20: [],
-    viewForm: false
   }
 
   handleChange = (e) => {
@@ -56,9 +67,11 @@ export default class EditRecipeForm extends Component {
 
   submitEdit = (e) => {
     e.preventDefault()
-    let recipe = {
+    const editRecipe = {
+      id: this.props.recipe.id,
       name: this.state.name,
       image: this.state.image,
+      origin: this.state.origin,
       category: this.state.category,
       instructions: this.state.instructions,
       ingredient1: this.state.ingredient1,
@@ -102,96 +115,94 @@ export default class EditRecipeForm extends Component {
       measurement19: this.state.measurement19,
       measurement20: this.state.measurement20
     }
-    this.props.editUserRecipe(recipe)
-  }
-
-  handleViewForm = () => {
-    this.setState({viewForm: !this.state.viewForm})
-  }
-
-  refreshPage() {
-    window.location.reload();
+    this.props.editUserRecipe(editRecipe)
   }
 
   render() {
     return (
-      <div>
-        <button onClick={() => this.handleViewForm()}>show form</button>
-        {this.state.viewForm ? 
-          <Form onSubmit={(e) => this.submitEdit(e)}>
-            <label>
-              Edit Recipe
-                <input onChange={this.handleChange} name="name" placeholder="name"/>
-                <input onChange={this.handleChange} name="category" placeholder="category"/>
-                <textarea onChange={this.handleChange} name="instructions" placeholder="instructions"/>
-                <input onChange={this.handleChange} name="image" placeholder="imageUrl"/>
-
-                <input onChange={this.handleChange} name="ingredient1" placeholder="ingredient 1"/>
-                <input onChange={this.handleChange} name="measurement1" placeholder="measurement 1"/>
-
-                <input onChange={this.handleChange} name="ingredient2" placeholder="ingredient 2"/>
-                <input onChange={this.handleChange} name="measurement2" placeholder="measurement 2"/>
-
-                <input onChange={this.handleChange} name="ingredient3" placeholder="ingredient 3"/>
-                <input onChange={this.handleChange} name="measurement3" placeholder="measurement 3"/>
-
-                <input onChange={this.handleChange} name="ingredient4" placeholder="ingredient 4"/>
-                <input onChange={this.handleChange} name="measurement4" placeholder="measurement 4"/>
-
-                <input onChange={this.handleChange} name="ingredient5" placeholder="ingredient 5"/>
-                <input onChange={this.handleChange} name="measurement5" placeholder="measurement 5"/>
-
-                <input onChange={this.handleChange} name="ingredient6" placeholder="ingredient 6"/>
-                <input onChange={this.handleChange} name="measurement6" placeholder="measurement 6"/>
-
-                <input onChange={this.handleChange} name="ingredient7" placeholder="ingredient 7"/>
-                <input onChange={this.handleChange} name="measurement7" placeholder="measurement 7"/>
-
-                <input onChange={this.handleChange} name="ingredient8" placeholder="ingredient 8"/>
-                <input onChange={this.handleChange} name="measurement8" placeholder="measurement 8"/>
-
-                <input onChange={this.handleChange} name="ingredient9" placeholder="ingredient 9"/>
-                <input onChange={this.handleChange} name="measurement9" placeholder="measurement 9"/>
-
-                <input onChange={this.handleChange} name="ingredient10" placeholder="ingredient 10"/>
-                <input onChange={this.handleChange} name="measurement10" placeholder="measurement 10"/>
-
-                <input onChange={this.handleChange} name="ingredient11" placeholder="ingredient 11"/>
-                <input onChange={this.handleChange} name="measurement11" placeholder="measurement 11"/>
-
-                <input onChange={this.handleChange} name="ingredient12" placeholder="ingredient 12"/>
-                <input onChange={this.handleChange} name="measurement12" placeholder="measurement 12"/>
-
-                <input onChange={this.handleChange} name="ingredient13" placeholder="ingredient 13"/>
-                <input onChange={this.handleChange} name="measurement13" placeholder="measurement 13"/>
-
-                <input onChange={this.handleChange} name="ingredient14" placeholder="ingredient 14"/>
-                <input onChange={this.handleChange} name="measurement14" placeholder="measurement 14"/>
-
-                <input onChange={this.handleChange} name="ingredient15" placeholder="ingredient 15"/>
-                <input onChange={this.handleChange} name="measurement15" placeholder="measurement 15"/>
-
-                <input onChange={this.handleChange} name="ingredient16" placeholder="ingredient 16"/>
-                <input onChange={this.handleChange} name="measurement16" placeholder="measurement 16"/>
-
-                <input onChange={this.handleChange} name="ingredient17" placeholder="ingredient 17"/>
-                <input onChange={this.handleChange} name="measurement17" placeholder="measurement 17"/>
-
-                <input onChange={this.handleChange} name="ingredient18" placeholder="ingredient 18"/>
-                <input onChange={this.handleChange} name="measurement18" placeholder="measurement 18"/>
-
-                <input onChange={this.handleChange} name="ingredient19" placeholder="ingredient 19"/>
-                <input onChange={this.handleChange} name="measurement19" placeholder="measurement 29"/>
-
-                <input onChange={this.handleChange} name="ingredient20" placeholder="ingredient 20"/>
-                <input onChange={this.handleChange} name="measurement20" placeholder="measurement 20"/>
-            </label>
-            <Form.Button onClick={this.refreshPage}>Submit</Form.Button>
+      <ThemeProvider theme={theme}>
+        <Grid className='buttonPadding'>
+          <Button onClick={() => this.props.handleEditForm()} variant='contained' color='primary'>remix recipe</Button>
+        </Grid>
+          {this.props.viewEditForm ?
+            <Form onSubmit={(e) => this.submitEdit(e)} className='buttonPadding'>   
+              <Form.Group widths='equal'>
+                <Form.Field onChange={this.handleChange} control={Input} name='name' placeholder='name'/>
+                <Form.Field onChange={this.handleChange} control={Input} name='origin' placeholder='origin'/>
+                <Form.Field onChange={this.handleChange} control={Input} name='category' placeholder='category'/>
+              </Form.Group>
+              <Form.Field onChange={this.handleChange} control={TextArea} name='instructions' placeholder='instructions'/>
+              <Form.Field onChange={this.handleChange} control={Input} name='image' placeholder='image url'/>
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient1' placeholder='ingredient 1'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement1' placeholder='measurement 1'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient2' placeholder='ingredient 2'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement2' placeholder='measurement 2'/>
+              </Form.Group>        
+              <Form.Group widths='equal'>     
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient3' placeholder='ingredient 3'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement3' placeholder='measurement 3'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient4' placeholder='ingredient 4'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement4' placeholder='measurement 4'/>
+              </Form.Group>
+              <Form.Group widths='equal'> 
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient5' placeholder='ingredient 5'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement5' placeholder='measurement 5'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient6' placeholder='ingredient 6'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement6' placeholder='measurement 6'/>
+              </Form.Group>
+              
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient7' placeholder='ingredient 7'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement7' placeholder='measurement 7'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient8' placeholder='ingredient 8'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement8' placeholder='measurement 8'/>
+              </Form.Group>
+              
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient9' placeholder='ingredient 9'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement9' placeholder='measurement 9'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient10' placeholder='ingredient 10'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement10' placeholder='measurement 10'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient11' placeholder='ingredient 11'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement11' placeholder='measurement 11'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient12' placeholder='ingredient 12'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement12' placeholder='measurement 12'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient13' placeholder='ingredient 13'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement13' placeholder='measurement 13'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient14' placeholder='ingredient 14'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement14' placeholder='measurement 14'/>
+              </Form.Group>
+              
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient15' placeholder='ingredient 15'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement15' placeholder='measurement 15'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient16' placeholder='ingredient 16'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement16' placeholder='measurement 16'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient17' placeholder='ingredient 17'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement17' placeholder='measurement 17'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient18' placeholder='ingredient 18'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement18' placeholder='measurement 18'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient19' placeholder='ingredient 19'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement19' placeholder='measurement 19'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='ingredient20' placeholder='ingredient 20'/>
+                  <Form.Field onChange={this.handleChange} control={Input} name='measurement20' placeholder='measurement 20'/>
+              </Form.Group>
+              <Form.Button 
+              >Submit</Form.Button>
           </Form>
           :
           null
-        }
-      </div>
+          }
+      </ThemeProvider>
     )
   }
 }

@@ -1,8 +1,9 @@
-import React from 'react';
-import { Form, Button, Segment } from 'semantic-ui-react';
-import { withRouter } from 'react-router';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router';
+import {Form, Input} from 'semantic-ui-react';
+import Button from '@material-ui/core/Button';
 
-class Signup extends React.Component {
+class Signup extends Component {
   state = {
     username: '',
     first_name: '',
@@ -24,8 +25,7 @@ class Signup extends React.Component {
     })
     .then(r => r.json())
     .then(tokenObj => {
-      if(tokenObj.jwt){
-      localStorage.setItem("token", tokenObj.jwt);
+      if(tokenObj.jwt){      localStorage.setItem('token', tokenObj.jwt);
       alert('signup was successful, please log in')
       this.props.history.push('/')
       }else{
@@ -36,31 +36,23 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Segment className={'form-container'}>
-        <Form onSubmit={this.handleSubmit} autocomplete={"off"}>
+      <div className='form-container'>        
+      <Form onSubmit={this.handleSubmit} autocomplete={'off'} className='loginAndSignup'>
           <Form.Field>
             <label>username</label>
             <input name='username' placeholder='username' onChange={this.handleInputChange} />
           </Form.Field>
-          <Form.Field>
-            <label>first name</label>
-            <input name='first_name' placeholder='first name' onChange={this.handleInputChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>last name</label>
-            <input name='last_name' placeholder='last name' onChange={this.handleInputChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>password</label>
-            <input type='password' name='password' placeholder='password' onChange={this.handleInputChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>password</label>
-            <input type='password' name='password_confirmation' placeholder='confirm password' onChange={this.handleInputChange} />
-          </Form.Field>
-          <Button type='submit' positive>Signup</Button>
+          <Form.Group widths='equal'>
+            <Form.Field onChange={this.handleInputChange} control={Input} name='first_name' label='first name' placeholder='first name'/>
+            <Form.Field onChange={this.handleInputChange} control={Input} name='last_name' label='last name' placeholder='last name'/>
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Field onChange={this.handleInputChange} control={Input} type='password' name='password' label='password' placeholder='password'/>
+            <Form.Field onChange={this.handleInputChange} control={Input} type='password' name='password_confirmation' label='confirm password' placeholder='confirm password'/>
+          </Form.Group>
+          <Button variant='contained' color='primary' type='submit' positive>Signup</Button>
         </Form>
-      </Segment>
+      </div>
     )
   }
 }

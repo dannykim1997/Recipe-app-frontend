@@ -1,11 +1,9 @@
-import React from "react"
-import { Card, CardActions, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
+import {Card, CardContent, CardMedia, Typography} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // maxWidth: 200,
         width: 200,
         margin: 20
     },
@@ -21,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeCard(props) {
     const classes = useStyles()
     return (
-        <Card className={classes.root} component={Link} to={`/recipe/${props.recipe.idMeal}`}>
-            <CardMedia className={classes.media} image={`${props.recipe.strMealThumb}`}/>
+        <Card component={Link} to={`/recipe/${props.recipe.idMeal}`}  className={classes.root}>
+            <CardMedia image={`${props.recipe.strMealThumb}`} className={classes.media}/>
             <CardContent>
                 <Typography className={classes.title}>
                     {props.recipe.strMeal}

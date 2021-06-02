@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Form, Segment } from "semantic-ui-react";
+import React, {Component} from 'react';
+import {withRouter} from 'react-router';
+import {Form, Input} from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
-import { withRouter } from "react-router";
 
 class Login extends Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   }
 
   handleInputChange = (e) => {
@@ -23,7 +23,8 @@ class Login extends Component {
     .then(r => r.json())
     .then(tokenObj => {
       if(tokenObj.jwt){
-      localStorage.setItem("token", tokenObj.jwt);
+      localStorage.setItem('token', tokenObj.jwt)
+      localStorage.setItem('username', tokenObj.user.data.attributes.username)
       this.props.handleLogin(tokenObj.jwt)
       this.props.history.push('/recipes')
       }
@@ -33,28 +34,13 @@ class Login extends Component {
 
     render() {
       return (
-        <Segment className="form-container">
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Field>
-              <label>Username</label>
-              <input
-                name="username"
-                placeholder="Username"
-                onChange={this.handleInputChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={this.handleInputChange}
-              />
-            </Form.Field>
-            <Button variant="contained" color="primary" type='submit'>Login</Button>
+        <div className='form-container'>
+          <Form onSubmit={this.handleSubmit} className='loginAndSignup'>
+            <Form.Field onChange={this.handleInputChange} control={Input} name='username' label='username' placeholder='username'/>
+            <Form.Field onChange={this.handleInputChange} control={Input} type='password' name='password' label='password' placeholder='password'/>
+            <Button variant='contained' color='secondary' type='submit'>Login</Button>
           </Form>
-        </Segment>
+        </div>
       )
     }
 }

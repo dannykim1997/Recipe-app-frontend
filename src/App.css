@@ -1,38 +1,65 @@
-.App {
-    text-align: center;
-  }
+body {
+    background-color: #fff1e6;
+}
   
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.gridContainer {
+    display: grid;
+}
+
+.cardInfo { grid-area: 1 / 1 / 2 / 3; }
+.recipePageImg { grid-area: 2 / 1 / 4 / 3; }
+.addorRemoveCookbookButton { grid-area: 1 / 3 / 2 / 5; }
+.ingAndMeas { grid-area: 2 / 3 / 4 / 5; }
+.instructions { grid-area: 4 / 1 / 6 / 5; }
+
+.recipeImg {
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 7px;
+}
+
+.addOrRemoveCookbookButton {
+    padding-top: 12px;
+    padding-right: 20px;
+    text-align: right;
+}
+
+.instructions {
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+ul {
+    display: table;
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 10px;
+}
+
+.buttonPadding {
+    padding: 20px;
+}
+
+.form-container {
+    background-color: white;
+    border-style: solid;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.loginAndSignup {
     justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.cookbookOwner {
+    justify-content: center;
+    padding: 20px
+}
