@@ -8,7 +8,8 @@ const confirmLogout = () => window.confirm('confirm logout');
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: '#00cecb',
+    // backgroundColor: '#00cecb',
+    backgroundImage: 'linear-gradient(to right, #00cecb, #33d8d5, #5ce0dd)'
   },
   title1: {
     fontSize: 40,

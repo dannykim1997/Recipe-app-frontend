@@ -45,7 +45,9 @@ export default class App extends Component {
       })
     .then(r => r.json())
     .then(json => {
-      this.setState({userRecipes: json.data})
+      this.setState({userRecipes: json.data, 
+        selection: 'recipes'
+    })
     })
   }
 
@@ -216,9 +218,13 @@ export default class App extends Component {
   }
   
   selected = (e) => {
-    this.setState({userRecipes: [...this.state.userRecipes.reverse()],
-      selection: e
+    if (e == 'reverse') {
+      this.setState({userRecipes: [...this.state.userRecipes.reverse()],
+        selection: e
     })
+    } else if (e == 'recipes') {
+      this.getUserRecipes()
+    }
   }
 
   // selected = (e) => {

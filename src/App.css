@@ -4,6 +4,8 @@ body {
   
 .gridContainer {
     display: grid;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .cardInfo { grid-area: 1 / 1 / 2 / 3; }
@@ -13,6 +15,7 @@ body {
 .instructions { grid-area: 4 / 1 / 6 / 5; }
 
 .recipeImg {
+    max-width: 600px;
     width: 100%;
     height: auto;
     padding-left: 20px;
