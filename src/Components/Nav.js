@@ -60,7 +60,7 @@ function Nav({ logged_in, history }) {
         <Typography variant='h6' className={classes.title4}>
           cipe
         </Typography>
-        <Typography variant='h2' className={classes.subtitle}>
+        <Typography variant='h3' className={classes.subtitle}>
           an online cookbook, for you, by you
         </Typography>
       <div class='ui secondary large menu'>
