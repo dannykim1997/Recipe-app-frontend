@@ -14,7 +14,7 @@ Oftentimes, when people look up a recipe online to cook, there are those who fol
 
 - Once added to their cookbook, users have the ability to edit or remix their recipe. Once these adjustments are saved, the recipe will be as they've left it, the next time they want to cook the recipe again.
 
-- Users also have the ability to manually add and create their own recipes. 
+- Users also have the ability to manually create their own recipes. 
 
 ## Planning vs Production
 
